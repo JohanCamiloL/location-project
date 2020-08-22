@@ -8,6 +8,11 @@ jobs:
     docker:
       -image: circleci/redis:latest
     steps:
+      - checkout
+
+      - setup_remote_docker:
+          docker_layer_caching: true
+
       - run:
         name: "Run docker redis image"
         command: docker run --name redisdb -p 6379:6379 redis
