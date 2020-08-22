@@ -1,20 +1,26 @@
 const Location = require('../model/Location');
-const redis = require('redis');
+const redisDb = require('../config/redisDb');
 
 /**
  * Get all locations from REDIS.
- * @returns {Array} Locations list.
+ * @returns {Promise} Locations list.
  */
-const getLocations = () => {
-
-}
+const getLocations = async () => await redisDb.getLocations();
 
 /**
  * Save a new location on REDIS.
  * @param {Object} locationProps Location properties.
- * @returns {Location} Location object.
+ * @returns {Promise} Location object.
  */
-const createLocation = (locationProps) => {
+const createLocation = async (locationProps) => {
+    const { parentName, name, areaM2 } = locationProps;
+    const location = new Location(parentName, name, areaM2);
+
+    try {
+        await redisDb.saveLocation(location);
+    } catch (error) {
+        console.log(error.message);
+    }
 
 }
 
@@ -23,9 +29,7 @@ const createLocation = (locationProps) => {
  * @param {String} name Location name.
  * @return {Location} Location object.
  */
-const getLocationByName = (name) => {
-
-}
+const getLocationByName = async (name) => await redisDb.getLocationByName(name);
 
 module.exports = {
     getLocations,

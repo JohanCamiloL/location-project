@@ -1,18 +1,18 @@
 class Location {
     /**
      * Location constructor.
-     * @param {Location} parentLocation Parent location.
+     * @param {String} parentLocation Parent location.
      * @param {String} name Location name.
      * @param {Number} areaM2 Location area in M2.
      */
     constructor(parentLocation, name, areaM2) {
-        this.parentLocation = parentLocation;
+        this._parentLocation = parentLocation;
         this._name = name;
         this._areaM2 = areaM2;
     }
 
     get parentLocation() {
-        return this.parentLocation;
+        return this._parentLocation;
     }
 
     get name() {
