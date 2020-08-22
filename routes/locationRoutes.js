@@ -5,9 +5,9 @@ const locationController = require('../controller/locationController');
  * @param {import('express').Express} app 
  */
 module.exports = (app) => {
-    app.get('/locations');
+    app.use('/locations', locationController.validateIfLocationExists);
 
-    app.post('/locations');
+    app.get('/locations', locationController.getLocations);
 
-    app.put('/locations/:id');
+    app.post('/locations', locationController.createLocation);
 }
